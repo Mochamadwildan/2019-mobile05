@@ -17,15 +17,29 @@ public class DynamicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic);
     }
-    public void handleClickLoadRedFragment(View view){
+    public void handleClickLoadRedFragment(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.btn_dynamic_fragment_placeholder,new RedFragment());
-        fragmentTransaction.commit();
-    }
-    public void handleClickLoadBlueFragment (View view){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.btn_dynamic_fragment_placeholder,new BlueFragment());
-        fragmentTransaction.commit();
-
+        RedFragment readFragment = (RedFragment) getSupportFragmentManager().findFragmentByTag("RED_FRAGMENT");
+        if(readFragment != null && readFragment.isVisible()){
+            fragmentTransaction.commit();
+        } else {
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left, R.anim.enter_from_left, R.anim.exit_from_right);
+            fragmentTransaction.replace(R.id.btn_dynamic_fragment_placeholder, new RedFragment(), "RED_FRAGMENT");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        }
+        public void handleClickLoadBlueFragment(View view){
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            BlueFragment blueFragment = (BlueFragment) getSupportFragmentManager().findFragmentByTag("BLUE_FRAGMENT");
+            if(blueFragment != null && blueFragment.isVisible()){
+                fragmentTransaction.commit();
+            } else {
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left, R.anim.enter_from_left, R.anim.exit_from_right);
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            fragmentTransaction.replace(R.id.btn_dynamic_fragment_placeholder, new BlueFragment(), "BLUE_FRAGMENT");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
     }
 }
