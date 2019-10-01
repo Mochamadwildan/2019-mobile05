@@ -21,15 +21,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <ImageView
             android:id="@+id/imageView15"
-            android:layout_width="263dp"
-            android:layout_height="311dp"
+            android:layout_width="248dp"
+            android:layout_height="279dp"
             android:src="@drawable/dipsss"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.306"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
